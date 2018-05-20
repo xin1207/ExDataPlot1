@@ -12,9 +12,13 @@ sub_powerconsumption <- subset(powerconsumption, (powerconsumption$Date == "1/2/
 
 sub_powerconsumption$Date <- as.Date(sub_powerconsumption$Date, format = "%d/%m/%Y")
 
-# Creating the plot1:
+# Combining the Date and Time variable and creating a new column in dataset named "DateTime":
 
-png("plot1.png", width = 480, height = 480)
+sub_powerconsumption$DateTime <- as.POSIXct(paste(sub_powerconsumption$Date, sub_powerconsumption$Time))
 
-hist(sub_powerconsumption$Global_active_power, main="Global Active Power",col='red',ylab= "Frequency", xlab="Global Active Power(kilowatts)")
+# Creating the plot2:
+
+png("plot2.png", width = 480, height = 480)
+
+plot(sub_powerconsumption$DateTime, sub_powerconsumption$Global_active_power, type = "l", ylab= "Global Active Power(kilowatts)", xlab="")
 dev.off()
